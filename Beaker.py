@@ -30,27 +30,27 @@ class BeakerMethods:
         for idx, section in enumerate(beaker):
             if section != 0:
                 return (idx, section)
-        return (-1, 0)
+        return (len(beaker) -1, 0)
 
 
     @staticmethod
-    def check_is_locked(beaker):
+    def check_is_solved(beaker):
         """ Check if the beaker contains a liquid of the same type in all the sections. """
-        is_locked = False
+        is_solved = False
 
         is_empty = BeakerMethods.check_is_empty(beaker)
         not_full = not BeakerMethods.check_is_full(beaker)
         if is_empty or not_full:
-            return is_locked
+            return is_solved
 
         # if all colors are the same as the first then its locked
         top_liquid = BeakerMethods.get_top_liquid(beaker)[-1]
         for liquid in beaker:
             if top_liquid != liquid:
-                return is_locked
+                return is_solved
 
-        is_locked = True
-        return is_locked
+        is_solved = True
+        return is_solved
 
 
     @staticmethod
@@ -65,11 +65,11 @@ class BeakerMethods:
     def transfer_liquid(source, destination):
         """ Transfers liquid form on beaker to the other. """
         destination_is_full = BeakerMethods.check_is_full(destination)
-        destination_is_locked = BeakerMethods.check_is_locked(destination)
+        destination_is_solved = BeakerMethods.check_is_solved(destination)
         source_is_empty = BeakerMethods.check_is_empty(source)
-        source_is_locked = BeakerMethods.check_is_locked(source)
+        source_is_solved = BeakerMethods.check_is_solved(source)
 
-        if(destination_is_full or source_is_empty or destination_is_locked or source_is_locked):
+        if(destination_is_full or source_is_empty or destination_is_solved or source_is_solved):
             return [source, destination]
 
         # the liquids can be transfered
@@ -114,6 +114,6 @@ class Beaker(BeakerMethods):
         """ Returns top most liquid and its index """
         return super().get_top_liquid(self.beaker)
 
-    def is_locked(self):
+    def is_solved(self):
         """ Checks if all segments in the beaker contain the same liquid. """
-        return super().check_is_locked(self.beaker)
+        return super().check_is_solved(self.beaker)
