@@ -100,14 +100,14 @@ class Beaker(BeakerMethods):
         self.beaker = beaker
         self.capacity = len(beaker)
 
+
     def __repr__(self):
         return str(self.beaker)
 
-    def __str__(self):
-        return str(self.beaker)
 
     def __getitem__(self, key):
         return self.beaker[key]
+
 
     def __setitem__(self, key, value):
         self.beaker[key] = value

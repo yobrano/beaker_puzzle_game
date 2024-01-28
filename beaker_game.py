@@ -68,6 +68,24 @@ class BeakerGame(BeakerGameStates):
         self.beakers = beakers
         self.game_state = self.get_state()
 
+
+    def __repr__(self):
+        return str(self.beakers)
+
+
+    def __getitem__(self, key):
+        return self.beakers[key]
+
+
+    def __setitem__(self, key, value):
+        self.beakers[key] = value
+        return self.beakers
+
+
+    def __len__(self):
+        return len(self.beakers)
+
+
     def transfer_liquid(self, source_idx, destination_idx):
         """ transfers the liquids, and updates the state. """
 
@@ -82,6 +100,8 @@ class BeakerGame(BeakerGameStates):
 
             self.game_state = self.get_state()
 
+        return self.game_state
+
     def get_state(self):
         """ Checks which state the game is in. """
         if BeakerGameStates.check_is_won(self.beakers):
@@ -91,6 +111,14 @@ class BeakerGame(BeakerGameStates):
         else:
             return BeakerGameStates.LOST
 
-    def __repr__(self):
-        return str(self.beakers)
+if __name__ == "__main__":
+    beaker_1 = Beaker([0, 2, 1, 1])
+    beaker_2 = Beaker([0, 3, 1, 1])
+    beaker_3 = Beaker([0, 1, 1, 1])
 
+    beakers = BeakerGame([beaker_1, beaker_2, beaker_3])
+    beakers.transfer_liquid(0, 1)
+    beakers.transfer_liquid(0, -1)
+    print(beakers) # Game is lost
+
+    
