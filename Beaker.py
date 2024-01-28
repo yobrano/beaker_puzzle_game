@@ -100,6 +100,22 @@ class Beaker(BeakerMethods):
         self.beaker = beaker
         self.capacity = len(beaker)
 
+    def __repr__(self):
+        return str(self.beaker)
+
+    def __str__(self):
+        return str(self.beaker)
+
+    def __getitem__(self, key):
+        return self.beaker[key]
+
+    def __setitem__(self, key, value):
+        self.beaker[key] = value
+        return self.beaker
+
+    def __len__(self):
+        return len(self.beaker)
+
     def is_empty(self):
         """ Checks if the beaker object is has no liquids """
         return super().check_is_empty(self.beaker)

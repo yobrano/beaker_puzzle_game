@@ -66,7 +66,7 @@ class BeakerGame(BeakerGameStates):
     def __init__(self, beakers):
         """ initializing the beakers """
         self.beakers = beakers
-        self.game_state = BeakerGameStates.PLAY
+        self.game_state = self.get_state()
 
     def transfer_liquid(self, source_idx, destination_idx):
         """ transfers the liquids, and updates the state. """
@@ -90,3 +90,7 @@ class BeakerGame(BeakerGameStates):
             return BeakerGameStates.PLAY
         else:
             return BeakerGameStates.LOST
+
+    def __repr__(self):
+        return str(self.beakers)
+
